@@ -9,7 +9,8 @@ require.config({
         'tests': 'classes',
         'libraries/jasmine': ['libraries/jasmine/jasmine'],
         'libraries/jasmine-html': ['libraries/jasmine/jasmine-html'],
-        'libraries/jasmine-boot': ['libraries/jasmine/boot']
+        'libraries/jasmine-boot': ['libraries/jasmine/boot'],
+        'libraries/angularMocks': 'libraries/angular/angularMocks'
     },
     shim: {
         'frameworks/angular': {
@@ -20,6 +21,10 @@ require.config({
         },
         'libraries/jasmine-boot': {
             deps : ['libraries/jasmine', 'libraries/jasmine-html']
+        },
+        'libraries/angularMocks': {
+            deps: ['frameworks/angular'],
+            exports: 'angular.mock'
         }
     }
 });

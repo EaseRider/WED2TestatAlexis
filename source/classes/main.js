@@ -5,16 +5,25 @@
 require.config({
     baseUrl: './',
     paths: {
-        'angular': 'frameworks/angular/angular.min',
-        'app': 'classes'
+            'libraries/angularRoute': 'libraries/angular/angular-route.min',
+            'angular': 'frameworks/angular/angular.min',
+            'app': 'classes'
         },
-        shim: {
-            'angular': {
-                exports: 'angular'
-            }
+    shim: {
+        'angular': {
+            exports: 'angular'
+        },
+        'libraries/angularRoute': {
+            deps: ['angular']
         }
+    }
 });
 
-require(['angular', 'app/modules/lafete'], function(Angular, Lafete){});
 
-//    return Angular.bootstrap(Lafete);
+require(['angular', 'app/modules/lafete'], function (Angular, Lafete) {
+    Angular.element(document).ready(function() {
+        Angular.bootstrap(document, [Lafete.name]);
+    });
+});
+
+

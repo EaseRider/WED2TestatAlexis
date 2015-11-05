@@ -1,0 +1,7 @@
+<div>{{9 *9}} Hallo!<br />
+    <ul ng-controller="EventListController">
+        <li ng-repeat="event in events">
+            {{event.name}}, {{event.place}}, {{event.date | date:"dd.MM.yyyy"}}
+        </li>
+    </ul>
+</div>
