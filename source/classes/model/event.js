@@ -4,7 +4,7 @@
 
 define([], function() {
     'use strict';
-    var Event = function(name, description, targetGroup, eventGift, location, preparation, event, maximalAmountOfGuests) {
+    var Event = function(name, description, targetGroup, eventGift, location, preparation, event, maximalAmountOfGuests, id) {
         this.name = name;
         this.description = description;
         this.targetGroup = targetGroup;
@@ -13,6 +13,7 @@ define([], function() {
         this.preparation = preparation;
         this.event = event;
         this.maximalAmountOfGuests = maximalAmountOfGuests;
+        this.id = id;
         Object.defineProperty(this, 'begin', {
            get: function () {
                return this.event.begin;

@@ -14,14 +14,42 @@ define(['app/model/event'], function(Event) {
                 street: 'Main street 5',
                 zipCode: 8000,
                 city: 'Zurich'
-            },
-            null,
+            },null,
             {
                 begin: new Date('2015-10-10T18:00:00.000Z'),
                 end: new Date('2015-10-11T02:00:00.000Z')
-            },
-            null
-        )];
+            }, null),
+            new Event(
+                'Big Party',
+                'The greatest birthday party simon ever had',
+                'Friends of Simon',
+                'drinks, cake, salad or snacks',
+                {
+                    name: 'Simons house',
+                    street: 'Main street 5',
+                    zipCode: 8000,
+                    city: 'Zurich'
+                },null,
+                {
+                    begin: new Date('2015-10-10T18:00:00.000Z'),
+                    end: new Date('2015-10-11T02:00:00.000Z')
+                }, null),
+            new Event(
+                'Car Viewing',
+                'The greatest birthday party simon ever had',
+                'Friends of Simon',
+                'drinks, cake, salad or snacks',
+                {
+                    name: 'Simons house',
+                    street: 'Main street 5',
+                    zipCode: 8000,
+                    city: 'Zurich'
+                },null,
+                {
+                    begin: new Date('2015-10-10T18:00:00.000Z'),
+                    end: new Date('2015-10-11T02:00:00.000Z')
+                }, null)
+        ];
     }
     return StorageService;
 });

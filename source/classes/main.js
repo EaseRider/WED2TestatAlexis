@@ -1,29 +1,24 @@
-/**
- * Created by Galaxus on 22.10.2015.
- */
-
 require.config({
+    // base url relative to the index.html
     baseUrl: './',
     paths: {
-            'libraries/angularRoute': 'libraries/angular/angular-route.min',
-            'angular': 'frameworks/angular/angular.min',
-            'app': 'classes'
-        },
+        'frameworks/angular': 'frameworks/angular/angular.min',
+        'libraries/angularRoute': 'libraries/angular/angular-route.min',
+        'app': 'classes'
+    },
+    // angular does not support async loading out of the box -> use the shim loader
     shim: {
-        'angular': {
+        'frameworks/angular': {
             exports: 'angular'
         },
         'libraries/angularRoute': {
-            deps: ['angular']
+            deps: ['frameworks/angular']
         }
     }
 });
 
-
-require(['angular', 'app/modules/lafete'], function (Angular, Lafete) {
+require(['frameworks/angular', 'app/modules/lafete'], function (Angular, Lafete) {
     Angular.element(document).ready(function() {
         Angular.bootstrap(document, [Lafete.name]);
     });
 });
-
-

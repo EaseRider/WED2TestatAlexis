@@ -1,41 +1,34 @@
-/**
- * Created by Galaxus on 22.10.2015.
- */
 require.config({
     baseUrl: './',
     paths: {
-        'frameworks/angular': '../source/frameworks/angular/angular.min',
+        'frameworks/angular': 'frameworks/angular',
         'app': '../source/classes',
         'tests': 'classes',
+        'libraries/angularMocks': 'libraries/angular/angular-mocks',
         'libraries/jasmine': ['libraries/jasmine/jasmine'],
         'libraries/jasmine-html': ['libraries/jasmine/jasmine-html'],
-        'libraries/jasmine-boot': ['libraries/jasmine/boot'],
-        'libraries/angularMocks': 'libraries/angular/angularMocks'
+        'libraries/jasmine-boot': ['libraries/jasmine/boot']
     },
     shim: {
         'frameworks/angular': {
-            exports: ['angular']
+            exports: 'angular'
+        },
+        'libraries/angularMocks': {
+            deps: ['frameworks/angular'],
+            exports: 'angular.mock'
         },
         'libraries/jasmine-html': {
             deps : ['libraries/jasmine']
         },
         'libraries/jasmine-boot': {
             deps : ['libraries/jasmine', 'libraries/jasmine-html']
-        },
-        'libraries/angularMocks': {
-            deps: ['frameworks/angular'],
-            exports: 'angular.mock'
         }
     }
 });
 
 
 require(['libraries/jasmine-boot'], function () {
-    require(['tests/model/eventTest'], function(){
-        //trigger Jasmine
-        window.onload();
-    });
-    require(['tests/controllers/EventListControllerTest'], function(){
+    require(['tests/controllers/eventListControllerTest','tests/model/eventTest'], function(){
         //trigger Jasmine
         window.onload();
     });

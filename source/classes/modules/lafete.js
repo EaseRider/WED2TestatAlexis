@@ -2,7 +2,7 @@
  * Created by Galaxus on 22.10.2015.
  */
 
-define(['angular', 'app/controllers/EventListController', 'app/services/storageService', 'libraries/angularRoute'],
+define(['frameworks/angular', 'app/controllers/EventListController', 'app/services/storageService', 'libraries/angularRoute'],
     function(Angular, EventListController, StorageService) {
         'use strict';
         var Lafete = Angular.module('lafete', ['ngRoute']);
