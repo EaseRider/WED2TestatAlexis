@@ -2,7 +2,7 @@
  * Created by Galaxus on 29.10.2015.
  */
 
-define([], function() {
+define(['app/services/uuidService'], function(UUIDService) {
     'use strict';
     var Event = function(name, description, targetGroup, eventGift, location, preparation, event, maximalAmountOfGuests, id) {
         this.name = name;
@@ -13,7 +13,8 @@ define([], function() {
         this.preparation = preparation;
         this.event = event;
         this.maximalAmountOfGuests = maximalAmountOfGuests;
-        this.id = id;
+        this.id = id || UUIDService.getRandomUuid();
+
         Object.defineProperty(this, 'begin', {
            get: function () {
                return this.event.begin;

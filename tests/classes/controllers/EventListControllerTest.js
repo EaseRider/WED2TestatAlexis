@@ -16,13 +16,14 @@ define(['app/controllers/EventListController', 'frameworks/angular', 'libraries/
                 it('contains 3 events', function() {
                     var scope = {};
                     //var eventListController = new EventListController(scope, storageService);
-                    expect(3).toBe(eventListController.scope.events.length);
+                    expect(eventListController.scope.events.all).toBeDefined();
                 });
 
                 it('Each Event should have a UUID as id', function() {
                     var regex = new RegExp('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}');
-                    for (var event in eventListController.scope.events) {
-                        expect(event.id).toMatch(regex);
+                    var events = eventListController.scope.events;
+                    for (var i = 0; i < events.length; i++) {
+                        expect(events[i].id).toMatch(regex);
                     }
                 });
             })

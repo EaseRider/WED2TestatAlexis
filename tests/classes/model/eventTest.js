@@ -1,7 +1,7 @@
 /**
  * Created by Galaxus on 29.10.2015.
  */
-define(['app/model/event'], function (Event) {
+define(['app/model/event', 'tests/factories/eventFactory'], function (Event, EventFactory) {
     'use strict';
 
     describe('Event test suite', function() {
@@ -9,24 +9,7 @@ define(['app/model/event'], function (Event) {
 
         // setup
         beforeEach(function() {
-            event = new Event(
-                'Simons birthday',
-                'The greatest birthday party simon ever had',
-                'Friends of Simon',
-                'drinks, cake, salad or snacks',
-                {
-                    name: 'Simons house',
-                    street: 'Main street 5',
-                    zipCode: 8000,
-                    city: 'Zurich'
-                },
-                null,
-                {
-                    begin: new Date('2015-10-10T18:00:00.000Z'),
-                    end: new Date('2015-10-11T02:00:00.000Z')
-                },
-                null
-            );
+            event = EventFactory.createEvent();
         });
 
         it('Expects changed event begin on set begin', function() {
@@ -43,6 +26,12 @@ define(['app/model/event'], function (Event) {
             event.end = new Date('2015-10-11T04:00:00.000Z');
             expect(event.end)
                 .toEqual(new Date('2015-10-11T04:00:00.000Z'));
+        });
+
+        it('Expects id to be set on Event', function() {
+            var eventWithID = EventFactory.createEventWithID();
+            expect(eventWithID.id)
+                .toEqual('a91cf326-fd89-4141-800b-348f6b6c1dfc');
         });
     });
 });
