@@ -2,19 +2,20 @@
  * Created by Galaxus on 22.10.2015.
  */
 
-define(['frameworks/angular', 'app/controllers/EventListController', 'app/services/storageService', 'app/controllers/event/detailController', 'libraries/angularRoute'],
-    function(Angular, EventListController, StorageService, EventDetailController) {
+define(['frameworks/angular', 'app/controllers/EventListController', 'app/repository/eventRepository', 'app/controllers/event/detailController', 'libraries/angularRoute'],
+    function(Angular, EventListController, EventRepository, EventDetailController) {
         'use strict';
         var Lafete = Angular.module('lafete', ['ngRoute']);
 
         /* Services */
-        Lafete.service('StorageService', StorageService);
+        EventRepository.$inject = ['$http'];
+        Lafete.service('EventRepository', EventRepository);
 
         /* Controllers */
-        EventListController.$inject = ['$scope', 'StorageService'];
+        EventListController.$inject = ['$scope', 'EventRepository'];
         Lafete.controller('EventListController', EventListController);
 
-        EventDetailController.$inject = ['$scope', '$routeParams', 'StorageService'];
+        EventDetailController.$inject = ['$scope', '$routeParams', 'EventRepository'];
         Lafete.controller('EventDetailController', EventDetailController);
 
         /* Routes */

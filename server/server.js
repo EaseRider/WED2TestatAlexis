@@ -116,12 +116,13 @@ createGuest(event2, null, "F. Meier", null, null );
  */
 var app = express();
 app.use(allowCrossDomain);
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use('/api', express.static(__dirname + '/api'));
 app.use('/', express.static(__dirname + '/webapp/source'));
 // tests, remove this for production
 app.use('/tests', express.static(__dirname + '/webapp/tests'));
 app.use('/source', express.static(__dirname + '/webapp/source'));
+app.use('/api', express.static(__dirname + '/webapp/source'));
 
 
 /**
