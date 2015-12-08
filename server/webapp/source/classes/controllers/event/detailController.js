@@ -2,16 +2,21 @@
  * Created by Galaxus on 26.11.2015.
  */
 // classes/controllers/event/detailController.js
-define([], function() {
+define(['app/model/event'], function (Event) {
     'use strict';
 
     var EventDetailController = function($scope, $routeParams, EventRepository) {
         this.scope = $scope;
-        EventRepository.get($routeParams.eventId, function (event) {
-            $scope.event = event;
-            console.log(event);
-        });
-        //this.scope.event = EventRepository.get($routeParams.eventId);
+        if ($routeParams.eventId) {
+            EventRepository.get($routeParams.eventId, function (event) {
+                $scope.event = event;
+                console.log(event);
+            });
+        } else {
+            this.scope.event = new Event();
+            console.log("halloo");
+            console.log(this.scope.event);
+        }
     }
 
     return EventDetailController;

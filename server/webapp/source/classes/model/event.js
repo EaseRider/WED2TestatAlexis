@@ -4,32 +4,38 @@
 
 define(['app/services/uuidService'], function(UUIDService) {
     'use strict';
-    var Event = function(name, description, targetGroup, eventGift, location, times, maximalAmountOfGuests, id) {
-        this.name = name;
-        this.description = description;
-        this.targetGroup = targetGroup;
-        this.eventGift = eventGift;
-        this.location = location;
-        this.times = times;
-        this.maximalAmountOfGuests = maximalAmountOfGuests || null;
-        this.id = id || UUIDService.getRandomUuid();
 
-        Object.defineProperty(this, 'begin', {
-           get: function () {
-               return this.times.begin;
-           },
-            set: function(begin) {
-                this.times.begin = begin;
-            }
-        });
-        Object.defineProperty(this, 'end', {
-            get: function () {
-                return this.times.end;
-            },
-            set: function(end) {
-                this.times.end = end;
-            }
-        });
+    var Event = function(name, description, targetGroup, eventGift, location, times, maximalAmountOfGuests, id) {
+        if(name !== undefined) {
+            this.name = name;
+            this.description = description;
+            this.targetGroup = targetGroup;
+            this.eventGift = eventGift;
+            this.location = location;
+            this.times = times;
+            this.maximalAmountOfGuests = maximalAmountOfGuests || null;
+            this.guests = [];
+            this.id = id || UUIDService.getRandomUuid();
+
+            Object.defineProperty(this, 'begin', {
+                get: function () {
+                    return this.times.begin;
+                },
+                set: function (begin) {
+                    this.times.begin = begin;
+                }
+            });
+            Object.defineProperty(this, 'end', {
+                get: function () {
+                    return this.times.end;
+                },
+                set: function (end) {
+                    this.times.end = end;
+                }
+            });
+        } else {
+            Event.call(this, '', '', '', '', '', {times:{"begin":'',"end":''}}, '', '');
+        }
     };
 
 
@@ -39,7 +45,7 @@ define(['app/services/uuidService'], function(UUIDService) {
     //name, description, targetGroup, eventGift, location, preparation, event, maximalAmountOfGuests, id
     Event.createFromDTO = function(jsonData) {
         if (jsonData != null) {
-            return new Event(
+            var event = new Event(
                 jsonData.name,
                 jsonData.description,
                 jsonData.targetGroup,
@@ -51,6 +57,8 @@ define(['app/services/uuidService'], function(UUIDService) {
                 jsonData.maximalAmoutOfGuests,
                 jsonData.id
             );
+            event.guests = jsonData.guests;
+            return event;
         } else {
             return null;
         }

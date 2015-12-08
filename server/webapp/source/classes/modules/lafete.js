@@ -28,6 +28,12 @@ define(['frameworks/angular', 'app/controllers/EventListController', 'app/reposi
                 }).when('/events/:eventId', {
                     controller: 'EventDetailController',
                     templateUrl: './views/event/detail.html'
+                }).when('/events/edit/:eventId', {
+                    controller: 'EventDetailController',
+                    templateUrl: './views/event/edit.html'
+                }).when('/event/add', {
+                    controller: 'EventDetailController',
+                    templateUrl: './views/event/edit.html'
                 }).otherwise({
                     redirectTo: '/events'
                 });

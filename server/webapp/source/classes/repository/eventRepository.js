@@ -34,9 +34,7 @@ define(['app/model/event'], function (Event) {
                     var event = Event.createFromDTO(data);
                     successCallback(event);
                 })
-                .error(function(data){
-
-                });
+                .error(function(data){});
         };
 
         this.add = function(event, successCallback) {
