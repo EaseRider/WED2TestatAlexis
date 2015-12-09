@@ -2,7 +2,7 @@
  * Created by Galaxus on 29.10.2015.
  */
 
-define(['app/services/uuidService'], function(UUIDService) {
+define(['app/services/uuidService', 'app/model/guest'], function(UUIDService, Guest) {
     'use strict';
 
     var Event = function(name, description, targetGroup, contributionsDescription, location, times, maximalAmountOfGuests, id) {
@@ -57,7 +57,10 @@ define(['app/services/uuidService'], function(UUIDService) {
                 jsonData.maximalAmoutOfGuests,
                 jsonData.id
             );
-            event.guests = jsonData.guests;
+            event.guests = jsonData.guests.map(function (guestDTO) {
+                return Guest.createFromDTO(guestDTO);
+            });
+            //event.guests = jsonData.guests;
             return event;
         } else {
             return null;

@@ -15,7 +15,7 @@
 <div data-ng-controller="EventListController">
     <h2>Create an Event: {{event.name}}</h2>
 
-    < novalidate class="simple-form">
+<form novalidate class="simple-form">
         Name: <input type="text" ng-model="event.name" /><br />
         Start (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.begin" /><br />
         End (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.end" /><br />

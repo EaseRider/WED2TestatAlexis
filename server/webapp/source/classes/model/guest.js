@@ -24,7 +24,7 @@ define(['app/services/uuidService'], function(UUIDService) {
      */
     Guest.createFromDTO = function(jsonData) {
         if (jsonData != null) {
-            return new Event(
+            return new Guest(
                 jsonData.name,
                 jsonData.contribution,
                 jsonData.comment,
