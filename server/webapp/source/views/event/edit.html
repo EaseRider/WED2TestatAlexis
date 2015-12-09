@@ -1,5 +1,37 @@
-<div ng-controller="EventListController">
-    <h2>{{event.name}}</h2>
+<style type="text/css">
+
+    input:required:invalid, input:focus:invalid {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAeVJREFUeNqkU01oE1EQ/mazSTdRmqSxLVSJVKU9RYoHD8WfHr16kh5EFA8eSy6hXrwUPBSKZ6E9V1CU4tGf0DZWDEQrGkhprRDbCvlpavan3ezu+LLSUnADLZnHwHvzmJlvvpkhZkY7IqFNaTuAfPhhP/8Uo87SGSaDsP27hgYM/lUpy6lHdqsAtM+BPfvqKp3ufYKwcgmWCug6oKmrrG3PoaqngWjdd/922hOBs5C/jJA6x7AiUt8VYVUAVQXXShfIqCYRMZO8/N1N+B8H1sOUwivpSUSVCJ2MAjtVwBAIdv+AQkHQqbOgc+fBvorjyQENDcch16/BtkQdAlC4E6jrYHGgGU18Io3gmhzJuwub6/fQJYNi/YBpCifhbDaAPXFvCBVxXbvfbNGFeN8DkjogWAd8DljV3KRutcEAeHMN/HXZ4p9bhncJHCyhNx52R0Kv/XNuQvYBnM+CP7xddXL5KaJw0TMAF8qjnMvegeK/SLHubhpKDKIrJDlvXoMX3y9xcSMZyBQ+tpyk5hzsa2Ns7LGdfWdbL6fZvHn92d7dgROH/730YBLtiZmEdGPkFnhX4kxmjVe2xgPfCtrRd6GHRtEh9zsL8xVe+pwSzj+OtwvletZZ/wLeKD71L+ZeHHWZ/gowABkp7AwwnEjFAAAAAElFTkSuQmCC);
+        background-position: right top;
+        background-repeat: no-repeat;
+        -moz-box-shadow: none;
+    }
+    input:required:valid {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAepJREFUeNrEk79PFEEUx9/uDDd7v/AAQQnEQokmJCRGwc7/QeM/YGVxsZJQYI/EhCChICYmUJigNBSGzobQaI5SaYRw6imne0d2D/bYmZ3dGd+YQKEHYiyc5GUyb3Y+77vfeWNpreFfhvXfAWAAJtbKi7dff1rWK9vPHx3mThP2Iaipk5EzTg8Qmru38H7izmkFHAF4WH1R52654PR0Oamzj2dKxYt/Bbg1OPZuY3d9aU82VGem/5LtnJscLxWzfzRxaWNqWJP0XUadIbSzu5DuvUJpzq7sfYBKsP1GJeLB+PWpt8cCXm4+2+zLXx4guKiLXWA2Nc5ChOuacMEPv20FkT+dIawyenVi5VcAbcigWzXLeNiDRCdwId0LFm5IUMBIBgrp8wOEsFlfeCGm23/zoBZWn9a4C314A1nCoM1OAVccuGyCkPs/P+pIdVIOkG9pIh6YlyqCrwhRKD3GygK9PUBImIQQxRi4b2O+JcCLg8+e8NZiLVEygwCrWpYF0jQJziYU/ho2TUuCPTn8hHcQNuZy1/94sAMOzQHDeqaij7Cd8Dt8CatGhX3iWxgtFW/m29pnUjR7TSQcRCIAVW1FSr6KAVYdi+5Pj8yunviYHq7f72po3Y9dbi7CxzDO1+duzCXH9cEPAQYAhJELY/AqBtwAAAAASUVORK5CYII=);
+        background-position: right top;
+        background-repeat: no-repeat;
+    }
+</style>
+<div data-ng-controller="EventListController">
+    <h2>Create an Event: {{event.name}}</h2>
+
+    < novalidate class="simple-form">
+        Name: <input type="text" ng-model="event.name" /><br />
+        Start (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.begin" /><br />
+        End (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.end" /><br />
+        Description: <textarea data-ng-model="event.description"></textarea><br />
+        Target Group: <input type="text"  data-ng-model="event.targetGroup" /><br />
+        Contributions: <input type="text"  data-ng-model="event.contributionsDescription" /><br />
+        <div>
+            <p>Location:</p>
+            <p>Name: <input type="text"  data-ng-model="event.location.name" /></p>
+            <p>Street: <input type="text"  data-ng-model="event.location.street" /></p>
+            <p>ZipCode: <input type="text"  data-ng-model="event.location.zipCode" /></p>
+            <p>City: <input type="text"  data-ng-model="event.location.city" /></p>
+        </div>
+        Maximal number of Guests: <input type="text"  data-ng-model="event.maximalAmoutOfGuests" /><br />
+    <input type="submit" ng-click="add(event)" value="Add Event" />
+    </form>
 
     <p>{{event.description}}</p>
 
@@ -13,9 +45,9 @@
 
     <p data-ng-if="event.targetGroup">{{event.targetGroup}}</p>
 
-    <h3 data-ng-if="event.eventGift">Event gift</h3>
+    <h3 data-ng-if="event.contributionsDescription">Event gift</h3>
 
-    <p data-ng-if="event.eventGift">{{event.eventGift}}</p>
+    <p data-ng-if="event.contributionsDescription">{{event.contributionsDescription}}</p>
 
     <h3>Location</h3>
 
@@ -40,5 +72,5 @@
 
     </ul>
 
-    <p data-ng-if="event.eventGift">{{event.eventGift}}</p>
+    <p data-ng-if="event.contributionsDescription">{{event.contributionsDescription}}</p>
 </div>
