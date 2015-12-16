@@ -6,7 +6,7 @@ define(['app/model/event'], function (Event) {
 
     var EventFactory = {
         createEvent: function() {
-            return new Event(
+            var event = new Event(
                     'Simons birthday',
                     'The greatest birthday party simon ever had',
                     'Friends of Simon',
@@ -23,9 +23,11 @@ define(['app/model/event'], function (Event) {
                     },
                     null
                 );
+
+            return event;
         },
         createEventWithID: function(id) {
-            return new Event(
+            var event = new Event(
                 'Simons birthday',
                 'The greatest birthday party simon ever had',
                 'Friends of Simon',
@@ -43,6 +45,7 @@ define(['app/model/event'], function (Event) {
                 null,
                 id ? id : 'a91cf326-fd89-4141-800b-348f6b6c1dfc'
             );
+            return event;
         }
     };
 

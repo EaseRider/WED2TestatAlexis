@@ -1,9 +1,9 @@
 /**
  * Created by Galaxus on 09.12.2015.
  */
-define(['app/model/event'], function (Event) {
+define(['app/model/guest'], function (Guest) {
     'use strict';
-    var EventRepository = function ($http) {
+    var GuestRepository = function ($http) {
         this.urls = {
             all: '/api/events/{eventId}/guests',
             get: '/api/events/{eventId}/guests/{guestId}',
@@ -14,7 +14,7 @@ define(['app/model/event'], function (Event) {
             $http.get(this.urls.all.replace('{eventId}', eventID))
                 .success(function(data){
                     var guests;
-                    if (data && data.events) {
+                    if (data && data.guests) {
                         guests = data.guests.map(function (eventDTO) {
                             return Guest.createFromDTO(eventDTO);
                         });
@@ -24,29 +24,29 @@ define(['app/model/event'], function (Event) {
                     successCallback(guests);
                 })
                 .error(function(data) {
-                    if (1==1) {}
                 });
         };
 
         this.get = function(eventID, guestID, successCallback) {
-            $http.get(this.urls.get.replace('{eventId}', eventID))
+            $http.get(this.urls.get.replace('{eventId}', eventID).replace('{guestId}', guestID))
                 .success(function(data){
-                    var event = Event.createFromDTO(data);
-                    successCallback(event);
+                    var guest = Guest.createFromDTO(data);
+                    successCallback(guest);
                 })
                 .error(function(data){});
         };
 
-        this.add = function(event, successCallback, errorCallback) {
-            return $http.post(this.urls.add, JSON.stringify(event))
+        this.add = function(eventID, guest, successCallback, errorCallback) {
+            return $http.post(this.urls.add.replace('{eventId}', eventID), JSON.stringify(guest))
                 .success(function(data) {
-                    var event = Event.createFromDTO(data);
-                    successCallback(event);
+                    var guest = Guest.createFromDTO(data);
+                    successCallback(guest);
                 })
                 .error(function(message) {
-                    errorCallback(message);
+                    if (errorCallback)
+                        errorCallback(message);
                 });
         };
     }
-    return EventRepository;
+    return GuestRepository;
 });

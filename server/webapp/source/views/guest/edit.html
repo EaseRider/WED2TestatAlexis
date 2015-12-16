@@ -13,22 +13,11 @@
     }
 </style>
 <div data-ng-controller="EventListController">
-    <h2>Create an Event: {{event.name}}</h2>
+    <h2>{{event.name}}-Guest</h2>
 
 <form novalidate class="simple-form">
-    Name: <input type="text" ng-model="event.name" /><br />
-    Start (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.begin" /><br />
-    End (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.end" /><br />
-    Description: <textarea data-ng-model="event.description"></textarea><br />
-    Target Group: <input type="text"  data-ng-model="event.targetGroup" /><br />
-    Contributions: <input type="text"  data-ng-model="event.contributionsDescription" /><br />
-    <div>
-        <p>Location:</p>
-        <p>Name: <input type="text"  data-ng-model="event.location.name" /></p>
-        <p>Street: <input type="text"  data-ng-model="event.location.street" /></p>
-        <p>ZipCode: <input type="text"  data-ng-model="event.location.zipCode" /></p>
-        <p>City: <input type="text"  data-ng-model="event.location.city" /></p>
-    </div>
-    Maximal number of Guests: <input type="text"  data-ng-model="event.maximalAmoutOfGuests" /><br />
-    <input type="submit" ng-click="add(event)" value="Add Event" />
+    Name: <input type="text" ng-model="guest.name" /><br />
+    Contribution: <input type="text" ng-model="guest.contribution" /><br />
+    Comment: <input type="text" ng-model="guest.comment" /><br />
+    <input type="submit" ng-click="add(guest)" value="Add Guest" />
 </form>

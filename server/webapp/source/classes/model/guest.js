@@ -14,7 +14,7 @@ define(['app/services/uuidService'], function(UUIDService) {
 
             this.id = id || UUIDService.getRandomUuid();
         } else {
-            Event.call(this, '', '', '', false);
+            Guest.call(this, '', '', '', false);
         }
     };
 

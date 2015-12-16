@@ -10,7 +10,7 @@ define(['app/model/event'], function (Event) {
             add: '/api/events'
         };
 
-        this.all = function(successCallback) {
+        this.all = function(successCallback, errorCallback) {
             $http.get(this.urls.all)
                 .success(function(data){
                     var events;
@@ -24,7 +24,7 @@ define(['app/model/event'], function (Event) {
                     successCallback(events);
                 })
                 .error(function(data) {
-                    if (1==1) {}
+                    errorCallback(data);
                 });
         };
 
@@ -38,14 +38,19 @@ define(['app/model/event'], function (Event) {
         };
 
         this.add = function(event, successCallback, errorCallback) {
-            return $http.post(this.urls.add, JSON.stringify(event))
-                .success(function(data) {
-                    var event = Event.createFromDTO(data);
-                    successCallback(event);
-                })
-                .error(function(message) {
-                    errorCallback(message);
-                });
+            this.get(event.id, function (data) {
+
+            })
+                return $http.post(this.urls.add, JSON.stringify(event))
+                    .success(function (data) {
+                        var event = Event.createFromDTO(data);
+                        successCallback(event);
+                    })
+                    .error(function (message) {
+                        if (errorCallback)
+                            errorCallback(message);
+                    });
+
         };
     }
     return EventRepository;

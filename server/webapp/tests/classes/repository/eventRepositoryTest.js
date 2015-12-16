@@ -55,7 +55,10 @@ define(['app/model/event', 'app/repository/eventRepository', 'app/services/uuidS
                         var event;
                         eventRepository.get('not-existing-uuid', function (eventResult) {
                             event = eventResult;
-                        });
+                        },
+                            function (error) {
+                                console.log('Error');
+                            });
                         $httpBackend.flush();
                         expect(event).toBeNull();
                     });

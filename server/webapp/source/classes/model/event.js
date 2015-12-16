@@ -14,6 +14,11 @@ define(['app/services/uuidService', 'app/model/guest'], function(UUIDService, Gu
             this.location = location;
             this.times = times;
             this.maximalAmountOfGuests = maximalAmountOfGuests || null;
+            Object.defineProperty(this, 'hasMorePlaceForGuests', {
+                get: function() {
+                    return this.maximalAmountOfGuests ? (this.guests.length < maximalAmountOfGuests) : true;
+                }
+            });
             this.guests = [];
             this.id = id || UUIDService.getRandomUuid();
 
@@ -51,16 +56,15 @@ define(['app/services/uuidService', 'app/model/guest'], function(UUIDService, Gu
                 jsonData.targetGroup,
                 jsonData.contributionsDescription,
                 jsonData.location,
-                //jsonData.preparation,
                 jsonData.times,
-                //jsonData.times,
                 jsonData.maximalAmoutOfGuests,
                 jsonData.id
             );
-            event.guests = jsonData.guests.map(function (guestDTO) {
-                return Guest.createFromDTO(guestDTO);
-            });
-            //event.guests = jsonData.guests;
+            if (jsonData.guests) {
+                event.guests = jsonData.guests.map(function (guestDTO) {
+                    return Guest.createFromDTO(guestDTO);
+                });
+            }
             return event;
         } else {
             return null;

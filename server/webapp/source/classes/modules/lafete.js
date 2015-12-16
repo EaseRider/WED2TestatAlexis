@@ -2,8 +2,9 @@
  * Created by Galaxus on 22.10.2015.
  */
 
-define(['frameworks/angular', 'app/controllers/EventListController', 'app/repository/eventRepository', 'app/repository/eventRepository', 'app/controllers/EventDetailController', 'libraries/angularRoute'],
-    function(Angular, EventListController, EventRepository, GuestRepository, EventDetailController) {
+define(['frameworks/angular', 'app/controllers/EventListController', 'app/repository/eventRepository',
+            'app/repository/guestRepository', 'app/controllers/EventDetailController', 'app/controllers/GuestDetailController', 'libraries/angularRoute'],
+    function(Angular, EventListController, EventRepository, GuestRepository, EventDetailController, GuestDetailController) {
         'use strict';
         var Lafete = Angular.module('lafete', ['ngRoute']);
 
@@ -17,10 +18,12 @@ define(['frameworks/angular', 'app/controllers/EventListController', 'app/reposi
         EventListController.$inject = ['$scope', 'EventRepository'];
         Lafete.controller('EventListController', EventListController);
 
-        console.log('LAfete: Call'+Date.now());
-
         EventDetailController.$inject = ['$scope', '$routeParams', 'EventRepository', '$location'];
         Lafete.controller('EventDetailController', EventDetailController);
+
+
+        GuestDetailController.$inject = ['$scope', '$routeParams', 'EventRepository', 'GuestRepository', '$location'];
+        Lafete.controller('GuestDetailController', GuestDetailController);
 
         /* Routes */
         Lafete.config(function($routeProvider) {
@@ -31,10 +34,10 @@ define(['frameworks/angular', 'app/controllers/EventListController', 'app/reposi
                 }).when('/events/:eventId', {
                     controller: 'EventDetailController',
                     templateUrl: './views/event/detail.html'
+                }).when('/events/addGuest/:eventId', {
+                    controller: 'GuestDetailController',
+                    templateUrl: './views/guest/edit.html'
                 }).when('/event/add', {
-                    controller: 'EventDetailController',
-                    templateUrl: './views/event/edit.html'
-                }).when('/events/:eventId/addGuest', {
                     controller: 'EventDetailController',
                     templateUrl: './views/event/edit.html'
                 }).otherwise({
@@ -42,5 +45,7 @@ define(['frameworks/angular', 'app/controllers/EventListController', 'app/reposi
                 });
             }
         );
+        //console.log($routeProvider);
+        console.log(Lafete);
         return Lafete;
 });
