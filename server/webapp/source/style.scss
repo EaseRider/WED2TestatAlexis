@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  display: flex; /* or inline-flex */
+  flex-direction: column;
+  background: rgba(196, 220, 157, 0.5);
+  height: 100%;
+  width: 100%;
+  align-self: center;
+  margin: 0;
+}
+.listElement {
+  background: rgba(196, 220, 157,0.5);
+  margin: 0.2em;
+}
+.numberOfGuests {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-top: 1em;
+  width: 2em;
+  height: 2em;
+  float: left;
+  border-radius: 1em;
+  color: #ffffff;
+  line-height: 2em;
+  text-align: center;
+  background: rgba(76, 105, 189, 0.3);
+}
+.content {
+  align-self: center;
+}
+.lineRow {
+  display: table-row;
+}
+.lineCell {
+  display: table-cell;
+  vertical-align: middle;
+}
+.lineCellSpecial {
+  @extend .lineCell;
+  background: rgba(6, 189, 56, 0.5);
+  padding: 0.5em;
+}
+@media (max-width: 850px) {
+  .container {
+    width: 30em;
+    background: cyan;
+    flex: 1 1 100%;
+  }
+}

@@ -1,11 +1,13 @@
-<div ng-controller="EventListController">
-    <div style="background: rgba(80, 149, 36, 0.66);">
-        <div class="lineContainer"><h2>{{event.name}}</h2></div>
-        <div class="numberOfGuests lineContainer">{{event.guests.length}}</div> Guests
-    </div>
-<br>
+<div ng-controller="EventListController" class="content">
 
-    <div style="float: left;">{{event.description}}</div>
+    <div style="display: table-row;">
+        <div class="lineCell" ><h2>{{event.name}} </h2></div>
+        <div class="numberOfGuests lineCell">{{event.guests.length}}</div>
+        <div class="lineCell">Guests</div>
+    </div>
+    <br>
+
+    <div>{{event.description}}</div>
 
     <h3>Date & time</h3>
 
@@ -47,4 +49,7 @@
     </p>
 
     <p data-ng-if="event.contributionsDescription">{{event.contributionsDescription}}</p>
+    <div class="lineCell">
+        <strong><a href="#/events">Back to List</a></strong>
+    </div>
 </div>

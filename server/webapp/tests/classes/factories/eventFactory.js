@@ -23,7 +23,7 @@ define(['app/model/event'], function (Event) {
                     },
                     null
                 );
-
+            event.guests = [];
             return event;
         },
         createEventWithID: function(id) {
@@ -45,6 +45,7 @@ define(['app/model/event'], function (Event) {
                 null,
                 id ? id : 'a91cf326-fd89-4141-800b-348f6b6c1dfc'
             );
+            event.guests = [];
             return event;
         }
     };

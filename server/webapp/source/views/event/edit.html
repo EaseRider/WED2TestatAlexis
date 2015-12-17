@@ -12,65 +12,31 @@
         background-repeat: no-repeat;
     }
 </style>
-<div data-ng-controller="EventListController">
-    <h2>Create an Event: {{event.name}}</h2>
+<div data-ng-controller="EventListController" class="content">
+    <div class="lineRow">
+        <h2>Create an Event: {{event.name}}</h2>
+        <div class="lineCell">
+            <strong><a href="#/events">Back to List</a></strong>
+        </div>
+    </div>
 
 <form novalidate class="simple-form">
-        Name: <input type="text" ng-model="event.name" /><br />
-        Start (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.begin" /><br />
-        End (Date & Time): <input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.end" /><br />
-        Description: <textarea data-ng-model="event.description"></textarea><br />
-        Target Group: <input type="text"  data-ng-model="event.targetGroup" /><br />
-        Contributions: <input type="text"  data-ng-model="event.contributionsDescription" /><br />
-        <div>
-            <p>Location:</p>
-            <p>Name: <input type="text"  data-ng-model="event.location.name" /></p>
-            <p>Street: <input type="text"  data-ng-model="event.location.street" /></p>
-            <p>ZipCode: <input type="text"  data-ng-model="event.location.zipCode" /></p>
-            <p>City: <input type="text"  data-ng-model="event.location.city" /></p>
-        </div>
-        Maximal number of Guests: <input type="text"  data-ng-model="event.maximalAmoutOfGuests" /><br />
-    <input type="submit" ng-click="add(event)" value="Add Event" />
-    </form>
+    <div style="display: table;">
+        <div class="lineRow"><div class="lineCell">Name:</div><div class="lineCell"><input type="text" ng-model="event.name" /></div></div>
+        <div class="lineRow"><div class="lineCell">Start (Date & Time): </div><div class="lineCell"><input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.begin" /></div></div>
+        <div class="lineRow"><div class="lineCell">End (Date & Time): </div><div class="lineCell"><input type="datetime" pattern="\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}" data-ng-model="event.end" /></div></div>
+        <div class="lineRow"><div class="lineCell">Description: </div><div class="lineCell"><textarea data-ng-model="event.description"></textarea></div></div>
+        <div class="lineRow"><div class="lineCell">Target Group: </div><div class="lineCell"><input type="text"  data-ng-model="event.targetGroup" /></div></div>
+        <div class="lineRow"><div class="lineCell">Contributions: </div><div class="lineCell"><input type="text"  data-ng-model="event.contributionsDescription" /></div></div>
 
-    <p>{{event.description}}</p>
+            <div class="lineRow"><div class="lineCellSpecial"><b>Location</b></div><div class="lineCellSpecial"></div></div>
+            <div class="lineRow"><div class="lineCellSpecial">Name: </div><div class="lineCellSpecial"><input type="text"  data-ng-model="event.location.name" /></div></div>
+            <div class="lineRow"><div class="lineCellSpecial">Street: </div><div class="lineCellSpecial"><input type="text"  data-ng-model="event.location.street" /></div></div>
+            <div class="lineRow"><div class="lineCellSpecial">ZipCode: </div><div class="lineCellSpecial"><input type="text"  data-ng-model="event.location.zipCode" /></div></div>
+            <div class="lineRow"><div class="lineCellSpecial">City: </div><div class="lineCellSpecial"><input type="text"  data-ng-model="event.location.city" /></div></div>
 
-    <h3>Date & time</h3>
-
-    <p>{{event.begin | date:"dd.MM.yy HH:mm"}} - {{event.end | date:"dd.MM.yy HH:mm"}}</p>
-
-
-
-    <h3 data-ng-if="event.targetGroup">Target group</h3>
-
-    <p data-ng-if="event.targetGroup">{{event.targetGroup}}</p>
-
-    <h3 data-ng-if="event.contributionsDescription">Event gift</h3>
-
-    <p data-ng-if="event.contributionsDescription">{{event.contributionsDescription}}</p>
-
-    <h3>Location</h3>
-
-    <p>
-        <strong>{{event.location.name}}</strong><br/>
-        {{event.location.street}}<br/>
-        {{event.location.plz}} {{event.location.city}}
-    </p>
-
-
-    <p data-ng-if="event.maximalAmoutOfGuests">
-        <strong>Maximal amount of guests:</strong>
-        {{event.maximalAmoutOfGuests}}
-    </p>
-    <h3 data-ng-if="event.guests">GuestList</h3>
-
-    <ul data-ng-if="event.guests">
-        <li data-ng-repeat="guest in event.guests">
-            Guest: {{guest.name}}
-        </li>
-
-
-    </ul>
-
-    <p data-ng-if="event.contributionsDescription">{{event.contributionsDescription}}</p>
+    <div class="lineRow"><div class="lineCell">Maximal number of Guests: </div><div class="lineCell"><input type="text"  data-ng-model="event.maximalAmoutOfGuests" /></div></div>
+        <input type="submit" ng-click="add(event)" value="Add Event" />
+    </div>
+</form>
 </div>

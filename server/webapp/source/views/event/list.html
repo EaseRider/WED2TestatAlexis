@@ -1,9 +1,11 @@
-<h1>Events</h1>
-<p><a data-ng-href="#/event/add"><strong>Add Event</strong></a></p>
-<ul ng-controller="EventListController">
-    <li data-ng-repeat="event in events" class="listElement">
-        <a data-ng-href="#/events/{{event.id}}"><strong>{{event.name}}</strong></a><br />
-        {{event.location.name}}, {{event.location.street}}, {{event.location.plz}} {{event.location.city}}<br />
-        {{event.times.begin | date:"dd.MM.yy HH:mm"}} - {{event.times.end | date:"dd.MM.yy HH:mm"}}
-    </li>
-</ul>
+<div  ng-controller="EventListController" class="content">
+    <h1>Events</h1>
+    <p><a data-ng-href="#/event/add"><strong>Add Event</strong></a></p>
+    <ul>
+        <li data-ng-repeat="event in events" class="listElement">
+            <a data-ng-href="#/events/{{event.id}}"><strong>{{event.name}}</strong></a><br />
+            {{event.location.name}}, {{event.location.street}}, {{event.location.plz}} {{event.location.city}}<br />
+            {{event.times.begin | date:"dd.MM.yy HH:mm"}} - {{event.times.end | date:"dd.MM.yy HH:mm"}}
+        </li>
+    </ul>
+</div>

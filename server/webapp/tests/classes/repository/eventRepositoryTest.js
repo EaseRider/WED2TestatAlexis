@@ -18,18 +18,37 @@ define(['app/model/event', 'app/repository/eventRepository', 'app/services/uuidS
                 eventRepository = new EventRepository($http);
                 event = EventFactory.createEventWithID(uuid);
 
+
+
                 // $http Service will return this list of events when call /api/events
-                $httpBackend.when('GET', eventRepository.urls.all).respond({
+                /*$httpBackend.when('GET', eventRepository.urls.all).respond({
                     events: [{id: 1, name: 'Dinner'}, {id: 2, name: 'Lunch'}]
                 });
-                $httpBackend.when('GET', eventRepository.urls.get.replace('{eventId}', uuid)).respond({
+                /*$httpBackend.when('GET', eventRepository.urls.get.replace('{eventId}', uuid)).respond({
                     id: uuid, name: 'Dinner'
-                });
-                $httpBackend.when('GET', eventRepository.urls.get.replace('{eventId}', 'not-existing-uuid')).respond(null);
-                $httpBackend.when('POST', eventRepository.urls.add).respond({
-                    event: event
-                });
+                });*/
+                   /* $httpBackend.when('GET', '/api/events').respond(function (method, url, data){
+                        console.log('Do something');
+                        return [200, {}, {}];
+                });*/
+                var events = {};
+                events[event.id] = event;
 
+                $httpBackend.when('GET', /\/api\/events\/?.*/)
+                    .respond(function(method, url, data, headers) {
+                        var args = url.match(/\/api\/events\/(.+)/m);
+                        if (!args) {
+                            return [200, {events: [{id: 1, name: 'Dinner'}, {id: 2, name: 'Lunch'}]}];
+                        } else {
+                            console.log('some Data', url, args);
+                            console.log('First Arg: ', args[1]);
+                            return [200, events[args[1]]];
+                        }
+                    });
+                //$httpBackend.when('GET', eventRepository.urls.get.replace('{eventId}', 'not-existing-uuid')).respond(null);
+                $httpBackend.when('POST', eventRepository.urls.add).respond(function(method, url, data, headers) {
+                    return [200, {event: event}];
+                });
             }));
 
             describe('get()', function () {
@@ -107,43 +126,52 @@ define(['app/model/event', 'app/repository/eventRepository', 'app/services/uuidS
                     eventRepository.all(function(eventList) {
                         events = eventList;
                     });
-                    $httpBackend.flush();;
-                    expect(events).toEqual(jasmine.any(Array));;
+                    $httpBackend.flush();
+                    expect(events).toEqual(jasmine.any(Array));
                     expect(events.length).toEqual(0);
                 });
             });
 
             describe('add()', function () {
                 it('inserts element', function () {
-                    //$httpBackend.expectPOST(eventRepository.urls.add);
+                    var insEvent = EventFactory.createEvent();
+                    $httpBackend.expectGET(eventRepository.urls.get.replace('{eventId}', insEvent.id)).respond(null);
+                    $httpBackend.expectPOST(eventRepository.urls.add).respond(insEvent);
                     var eventResult;
-                    var callResult = eventRepository.add(event, function(event){
+                    eventRepository.add(insEvent, function(event){
                         eventResult = event;
                     });
                     $httpBackend.flush();
-                    expect(eventResult).toEqual(event);
+                    expect(eventResult).toEqual(insEvent);
                 });
 
-              /*  describe('same element again', function () {
+                describe('same element again', function () {
                     var size, status2;
                     // TODO
 
                     beforeEach(function () {
-                        eventRepository.add(event);
-
-                        size = eventRepository.events.length;
+                        //size = eventRepository.events.length;
+                        eventRepository.all(function(events) {
+                            size = events.length;
+                        });
+                        $httpBackend.flush();
                         status2 = eventRepository.add(event);
                     });
 
                     it('doesn\'t affect repository size', function () {
-                        expect(eventRepository.events.length).toBe(size);
+                        var chkSize;
+                        eventRepository.all(function(events) {
+                            chkSize = events.length;
+                        });
+                        $httpBackend.flush();
+                        expect(chkSize).toBeGreaterThan(0);
+                        expect(chkSize).toBe(size);
                     });
 
                     it('returns false', function () {
                         expect(status2).toBe(true);
-                        // TODO
                     });
-                });*/
+                });
             });
 
             // Check if there are no hanging requests

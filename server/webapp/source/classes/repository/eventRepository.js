@@ -24,7 +24,8 @@ define(['app/model/event'], function (Event) {
                     successCallback(events);
                 })
                 .error(function(data) {
-                    errorCallback(data);
+                    if (errorCallback)
+                        errorCallback(data);
                 });
         };
 
@@ -38,10 +39,24 @@ define(['app/model/event'], function (Event) {
         };
 
         this.add = function(event, successCallback, errorCallback) {
-            this.get(event.id, function (data) {
-
-            })
-                return $http.post(this.urls.add, JSON.stringify(event))
+            this.get(event.id, function (event) {
+                if (event == null) {
+                    $http.post(this.urls.add, JSON.stringify(event))
+                        .success(function (data) {
+                            var event = Event.createFromDTO(data);
+                            successCallback(event);
+                        })
+                        .error(function (message) {
+                            if (errorCallback)
+                                errorCallback(message);
+                        });
+                } else {
+                    if (errorCallback)
+                        errorCallback('Event allready Created!')
+                }
+            }.bind(this));
+            return true;
+                /*return $http.post(this.urls.add, JSON.stringify(event))
                     .success(function (data) {
                         var event = Event.createFromDTO(data);
                         successCallback(event);
@@ -49,7 +64,7 @@ define(['app/model/event'], function (Event) {
                     .error(function (message) {
                         if (errorCallback)
                             errorCallback(message);
-                    });
+                    });*/
 
         };
     }

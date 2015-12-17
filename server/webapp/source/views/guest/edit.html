@@ -12,12 +12,14 @@
         background-repeat: no-repeat;
     }
 </style>
-<div data-ng-controller="EventListController">
+<div data-ng-controller="EventListController" class="content">
     <h2>{{event.name}}-Guest</h2>
-
-<form novalidate class="simple-form">
-    Name: <input type="text" ng-model="guest.name" /><br />
-    Contribution: <input type="text" ng-model="guest.contribution" /><br />
-    Comment: <input type="text" ng-model="guest.comment" /><br />
-    <input type="submit" ng-click="add(guest)" value="Add Guest" />
-</form>
+    <form novalidate class="simple-form">
+        <div style="display: table;">
+            <div class="lineRow"><div class="lineCell">Name: </div><div class="lineCell"><input type="text" ng-model="guest.name" /></div></div>
+            <div class="lineRow"><div class="lineCell">Contribution: </div><div class="lineCell"><input type="text" ng-model="guest.contribution" /></div></div>
+            <div class="lineRow"><div class="lineCell">Comment: </div><div class="lineCell"><input type="text" ng-model="guest.comment" /></div></div>
+            <div class="lineRow"><div class="lineCell"><input type="submit" ng-click="add(guest)" value="Add Guest" /><div class="lineCell"><a data-ng-href="#/events/{{event.id}}"><strong>Back to Event</strong></a></div></div></div>
+        </div>
+    </form>
+</div>
